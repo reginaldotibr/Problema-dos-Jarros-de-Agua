@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Problema dos Jarros de Água</title>
+
+
+<style>
+:root {
+    --azul: #2563eb;
+    --verde-claro: #dcfce7;
+    --amarelo-claro: #fef9c3;
+    --cinza-bg: #f8fafc;
+    --texto: #0f172a;
+}
+
+body {
+    margin: 0;
+    padding: 40px;
+    font-family: "Inter", Arial, sans-serif;
+    background: linear-gradient(135deg, #e0e7ff, #f8fafc);
+    color: var(--texto);
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    background: white;
+    border-radius: 16px;
+    padding: 30px 35px 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 6px;
+    font-size: 28px;
+    color: var(--azul);
+}
+
+.subtitulo {
+    text-align: center;
+    color: #475569;
+    margin-bottom: 28px;
+    font-size: 15px;
+}
+
+.info {
+    background: var(--cinza-bg);
+    border-left: 5px solid var(--azul);
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 26px;
+    font-size: 14px;
+}
+
+/* ✅ CSS DA LEGENDA (INCLUÍDO AQUI) */
+.legenda {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed #cbd5e1;
+    color: #334155;
+    font-size: 13.5px;
+    line-height: 1.6;
+}
+
+.legenda strong {
+    color: #1e293b;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+thead th {
+    background: var(--azul);
+    color: white;
+    padding: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+.inicial {
+    background: var(--amarelo-claro);
+    font-weight: 600;
+}
+
+.final {
+    background: var(--verde-claro);
+    font-weight: 600;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 999px;
+    background: #fde68a;
+    color: #92400e;
+}
+
+.rodape {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Problema dos Jarros de Água</h1>
+<p class="subtitulo">
+Algoritmo resolvido com JavaScript • Visualização passo a passo
+</p>
+
+<div class="info">
+✅ Recipientes com capacidade <strong>8L, 5L e 3L</strong><br>
+✅ Estado inicial: apenas o recipiente de 8L inicia cheio<br>
+✅ Objetivo: obter <strong>4L no recipiente 1</strong> e <strong>4L no recipiente 2</strong>
+
+<div class="legenda">
+<strong>Legenda:</strong><br>
+• <strong>8L (Rec. 1)</strong> – Volume atual de água no recipiente 1 (capacidade máxima: 8 litros)<br>
+• <strong>5L (Rec. 2)</strong> – Volume atual de água no recipiente 2 (capacidade máxima: 5 litros)<br>
+• <strong>3L (Rec. 3)</strong> – Volume atual de água no recipiente 3 (capacidade máxima: 3 litros)
+</div>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Ação</th>
+<th>8L (Rec. 1)</th>
+<th>5L (Rec. 2)</th>
+<th>3L (Rec. 3)</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody id="tabela"></tbody>
+</table>
+
+<div class="rodape">
+Projeto educacional • Algoritmos • JavaScript • HTML & CSS
+</div>
+
+
+<div class="rodape">
+<strong>Créditos e referência:</strong><br>
+Este algoritmo é uma adaptação didática do <em>Problema dos Jarros de Água</em>, baseada em conteúdos educacionais da
+<strong>Rede BAH.IA</strong>.<br>
+Se for reutilizar ou redistribuir este material, mantenha os créditos e cite a origem.
+</div>
+
+
+</div>
+
+<script>
+const CAPACIDADES = [8, 5, 3];
+const INICIAL = [8, 0, 0];
+const OBJETIVO = "4,4,0";
+
+function transferir(estado, origem, destino) {
+    let novoEstado = [...estado];
+    let espaco = CAPACIDADES[destino] - novoEstado[destino];
+    let quantidade = Math.min(novoEstado[origem], espaco);
+
+    novoEstado[origem] -= quantidade;
+    novoEstado[destino] += quantidade;
+
+    return { novoEstado, quantidade };
+}
+
+function resolver() {
+    let fila = [{ estado: INICIAL, passos: [] }];
+    let visitados = new Set([INICIAL.toString()]);
+
+    while (fila.length) {
+        let atual = fila.shift();
+        if (atual.estado.toString() === OBJETIVO) return atual.passos;
+
+        for (let o = 0; o < 3; o++) {
+            for (let d = 0; d < 3; d++) {
+                if (o !== d && atual.estado[o] > 0) {
+                    let res = transferir(atual.estado, o, d);
+                    let chave = res.novoEstado.toString();
+
+                    if (!visitados.has(chave)) {
+                        visitados.add(chave);
+                        fila.push({
+                            estado: res.novoEstado,
+                            passos: [...atual.passos, {
+                                origem: o,
+                                destino: d,
+                                quantidade: res.quantidade,
+                                estado: res.novoEstado
+                            }]
+                        });
+                    }
+                }
+            }
+        }
+    }
+}
+
+const tabela = document.getElementById("tabela");
+
+// Passo 0 – estado inicial
+tabela.innerHTML += `
+<tr class="inicial">
+<td>0</td>
+<td><span class="badge">Inicial</span></td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>Estado inicial dos recipientes</td>
+</tr>
+`;
+
+resolver().forEach((p, i) => {
+    tabela.innerHTML += `
+<tr class="${p.estado.toString() === OBJETIVO ? 'final' : ''}">
+<td>${i + 1}</td>
+<td>${p.origem + 1} → ${p.destino + 1}</td>
+<td>${p.estado[0]}</td>
+<td>${p.estado[1]}</td>
+<td>${p.estado[2]}</td>
+<td>
+Transferido ${p.quantidade}L do recipiente ${p.origem + 1}
+→ recipiente ${p.destino + 1}
+</td>
+</tr>
+`;
+});
+</script>
+
+</body>
+</html>
