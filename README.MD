@@ -1,10 +1,6 @@
 
 ![Capa do projeto - Problema dos Jarros de Água](assets/capa.png)
 
-<p align="center">
-  <img src="assets/capa.png" alt="Capa do projeto - Problema dos Jarros de Água" width="800">
-</p>
-
 
 # 💧 Problema dos Jarros de Água
 
