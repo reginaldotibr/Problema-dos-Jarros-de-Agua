@@ -2,6 +2,12 @@
 ![Capa do projeto - Problema dos Jarros de Água](assets/capa.png)
 
 
+📘 Registro de aprendizado | Webinário Rede BAH.IA | 25/04/2026 – Algoritmo Jarros de Água
+Como atividade prática do Webinário da Rede BAH.IA, desenvolvi a resolução do Problema dos Jarros de Água, um exemplo clássico de algoritmo baseado em estados e transições.
+O exercício evidenciou a importância de regras claras e do pensamento algorítmico na organização de soluções aplicáveis também à Inteligência Artificial.
+#RedeBAHIA #Algoritmos #PensamentoComputacional #InteligenciaArtificial #Tecnologia
+
+
 # 💧 Problema dos Jarros de Água
 
 Visualização didática e interativa do **Problema dos Jarros de Água**, um problema clássico da área de **algoritmos, lógica de programação e ciência da computação**.
