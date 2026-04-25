@@ -1,3 +1,11 @@
+
+![Capa do projeto - Problema dos Jarros de Água](assets/capa.png)
+
+<p align="center">
+  <img src="assets/capa.png" alt="Capa do projeto - Problema dos Jarros de Água" width="800">
+</p>
+
+
 # 💧 Problema dos Jarros de Água
 
 Visualização didática e interativa do **Problema dos Jarros de Água**, um problema clássico da área de **algoritmos, lógica de programação e ciência da computação**.
